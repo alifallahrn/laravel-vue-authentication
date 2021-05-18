@@ -11,7 +11,7 @@
 
 <body>
     <div id="app">
-        <app></app>
+        <router-view></router-view>
     </div>
 </body>
 
