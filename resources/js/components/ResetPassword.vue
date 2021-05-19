@@ -4,7 +4,7 @@
       <div class="col-6">
         <section-header :loading="loading" />
         <div class="card">
-          <h5 class="card-header">Register</h5>
+          <h5 class="card-header">Reset Password</h5>
           <div class="card-body">
             <div v-if="this.errors.length">
               <ol class="alert alert-danger">
@@ -13,46 +13,10 @@
                 </li>
               </ol>
             </div>
-            <form @submit.prevent="register">
-              <div class="row mb-3">
-                <label for="first_name" class="col-sm-4 col-form-label"
-                  >First Name</label
-                >
-                <div class="col-sm-8">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="first_name"
-                    v-model="formData.first_name"
-                  />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="last_name" class="col-sm-4 col-form-label"
-                  >Last Name</label
-                >
-                <div class="col-sm-8">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="last_name"
-                    v-model="formData.last_name"
-                  />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="mobile" class="col-sm-4 col-form-label"
-                  >Mobile</label
-                >
-                <div class="col-sm-8">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="mobile"
-                    v-model="formData.mobile"
-                  />
-                </div>
-              </div>
+            <div v-if="this.message">
+              <div class="alert alert-success">{{ this.message }}</div>
+            </div>
+            <form @submit.prevent="reset">
               <div class="row mb-3">
                 <label for="email" class="col-sm-4 col-form-label">Email</label>
                 <div class="col-sm-8">
@@ -94,8 +58,8 @@
               </div>
               <div class="row">
                 <div class="offset-sm-4 col-sm-8">
-                  <button type="submit" class="btn btn-success text-light">
-                    Register
+                  <button type="submit" class="btn btn-primary text-light">
+                    Reset Password
                   </button>
                 </div>
               </div>
@@ -116,10 +80,10 @@ export default {
     return {
       loading: false,
       errors: {},
+      message: false,
+      token: null,
       formData: {
-        first_name: "",
-        last_name: "",
-        mobile: "",
+        token: "",
         email: "",
         password: "",
         password_confirmation: "",
@@ -127,12 +91,12 @@ export default {
     };
   },
   methods: {
-    register() {
+    reset() {
       this.loading = true;
       axios
-        .post("/api/register", this.formData)
+        .post("/api/reset", this.formData)
         .then((response) => {
-          if (response.status == 201) {
+          if (response.status == 200) {
             this.loading = false;
             this.$router.push("/login");
           }
@@ -143,6 +107,11 @@ export default {
           this.errors = values.flat();
         });
     },
+  },
+  mounted() {
+    const token = this.$route.params.token;
+    if (token == "") this.$router.push("/");
+    this.formData.token = token;
   },
 };
 </script>

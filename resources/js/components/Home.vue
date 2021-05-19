@@ -30,7 +30,7 @@ export default {
     getTasksList() {
       this.loading = true;
       axios
-        .get("api/tasks")
+        .get("/api/tasks")
         .then((response) => {
           this.tasks = response.data;
           this.loading = false;

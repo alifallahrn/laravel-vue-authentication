@@ -49,7 +49,7 @@ export default {
   methods: {
     getUserInformation() {
       axios
-        .get("api/user")
+        .get("/api/user")
         .then((response) => {
           this.userInformation = response.data;
           this.display_auth_links = true;
@@ -67,7 +67,7 @@ export default {
     logout() {
       this.loading = true;
       axios
-        .post("api/logout")
+        .post("/api/logout")
         .then((response) => {
           this.userInformation = {};
           this.token = false;
