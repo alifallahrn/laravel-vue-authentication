@@ -6072,6 +6072,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Register_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Register.vue */ "./resources/js/components/Register.vue");
 /* harmony import */ var _components_Forgot_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Forgot.vue */ "./resources/js/components/Forgot.vue");
 /* harmony import */ var _components_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ResetPassword.vue */ "./resources/js/components/ResetPassword.vue");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 
 
 
@@ -6080,7 +6081,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mode: 'history',
-  base: '/',
+  base: process.env.BASE_URL,
   fallback: true,
   routes: [{
     path: '/',

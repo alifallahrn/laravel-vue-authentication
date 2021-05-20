@@ -7,7 +7,7 @@ import ResetPassword from './components/ResetPassword.vue'
 
 export default {
     mode: 'history',
-    base: '/',
+    base: process.env.BASE_URL,
     fallback: true,
     routes: [
         {
