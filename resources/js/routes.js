@@ -1,4 +1,5 @@
 import Home from './components/Home.vue'
+import Tasks from './components/Tasks.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import Forgot from './components/Forgot.vue'
@@ -13,6 +14,11 @@ export default {
             path: '/',
             name: 'Home',
             component: Home
+        },
+        {
+            path: '/tasks',
+            name: 'Tasks',
+            component: Tasks
         },
         {
             path: '/login',

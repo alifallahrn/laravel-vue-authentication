@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tasks;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -15,7 +16,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Tasks::orderBy('completed_at', 'ASC')->orderBy('created_at', 'DESC')->get();
+        $tasks = Tasks::where('user_id', auth('api')->user()->id)->orderBy('completed_at', 'ASC')->orderBy('created_at', 'DESC')->get();
 
         return response($tasks, 200);
     }
@@ -29,6 +30,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $task = new Tasks();
+        $task->user_id = auth('api')->user()->id;
         $task->title = $request->task['title'];
         $task->save();
 

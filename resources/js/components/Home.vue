@@ -3,12 +3,17 @@
     <div class="row justify-content-md-center">
       <div class="col-6">
         <section-header :loading="loading" />
-        <task-add :tasks="tasks" v-on:updateTasksList="getTasksList()" />
-        <task-list
-          :tasks="tasks"
-          :loading="loading"
-          v-on:updateTasksList="getTasksList()"
-        />
+        <div class="card">
+          <div class="card-body">
+            <h1 class="text-center">Todolist</h1>
+            <p class="text-center">The to do list to organize work & life :)</p>
+            <div class="text-center mt-5">
+              <router-link to="/tasks" class="btn btn-secondary text-light"
+                >Get Started</router-link
+              >
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -22,26 +27,8 @@ export default {
   components: { taskAdd, taskList, sectionHeader },
   data: function () {
     return {
-      tasks: [],
       loading: false,
     };
-  },
-  methods: {
-    getTasksList() {
-      this.loading = true;
-      axios
-        .get("/api/tasks")
-        .then((response) => {
-          this.tasks = response.data;
-          this.loading = false;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-  },
-  created() {
-    this.getTasksList();
   },
 };
 </script>

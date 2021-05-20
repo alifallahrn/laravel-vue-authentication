@@ -48,6 +48,10 @@ export default {
   },
   methods: {
     getUserInformation() {
+      if (!this.token) {
+        this.display_auth_links = true;
+        return;
+      }
       axios
         .get("/api/user")
         .then((response) => {
@@ -62,6 +66,9 @@ export default {
         .catch((error) => {
           this.display_auth_links = true;
           console.log(error);
+          if (error.response.status == "401") {
+            localStorage.removeItem("token");
+          }
         });
     },
     logout() {
@@ -69,6 +76,7 @@ export default {
       axios
         .post("/api/logout")
         .then((response) => {
+          localStorage.removeItem("token");
           this.userInformation = {};
           this.token = false;
           this.loading = false;
